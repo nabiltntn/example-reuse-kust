@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# Copies the fields of the "values" ConfigMap into the SQLUser.
+# The kustomization that includes this component must provide that ConfigMap.
+replacements:
+  - source:
+      kind: ConfigMap
+      name: values
+      fieldPath: data.SQL_USER_NAME
+    targets:
+      - select:
+          kind: SQLUser
+        fieldPaths:
+          - metadata.name
+  - source:
+      kind: ConfigMap
+      name: values
+      fieldPath: data.SQL_USER_SQL_INSTANCE_NAME
+    targets:
+      - select:
+          kind: SQLUser
+        fieldPaths:
+          - spec.instanceRef.name
+
