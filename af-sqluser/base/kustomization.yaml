@@ -5,4 +5,4 @@ resources:
   - sqluser.yaml
 
 components:
-  - values.yaml
+  - ../components/values.yaml
